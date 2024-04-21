@@ -43,7 +43,10 @@ knowledge_base = {
   },
 
   "lists": {
-    "question": "What are lists in Python?",
+    "question": [
+      "What are lists in Python?",
+      "Define lists in Py.",
+    ], 
     "answer": "Lists are ordered collections of items. They can store different data types (like integers, strings, or even other lists) and are mutable (elements can be changed after creation).",
     "difficulty_level": "beginner",
     "additional_resources": "https://www.tutorialspoint.com/python/python_lists.htm"
@@ -62,13 +65,14 @@ knowledge_base = {
     "difficulty_level": "beginner",
     "additional_resources": "https://www.w3schools.com/python/python_conditional_statements.asp"
   },
-
+"""
   "strings": {
     "question": "What are strings in Python?",
     "answer": "Strings are sequences of characters. They are used to represent text data. Strings are immutable (their content cannot be changed after creation).",
     "difficulty_level": "beginner",
     "additional_resources": "https://www.tutorialspoint.com/python/python_strings.htm"
   },
+"""
 
   "operators": {
     "question": "What are operators in Python?",
