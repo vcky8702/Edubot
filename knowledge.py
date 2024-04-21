@@ -1,81 +1,31 @@
-import nltk
-from nltk.tokenize import word_tokenize
-from fuzzywuzzy import fuzz
-
-# Knowledge base
-knowledge_base = {
-  "greet": {
-    "question": "hello",
-    "answer": "Hello! It's nice to meet you. How can I assist you today?",
-    "difficulty_level": "beginner",
-    "additional_resources": "https://www.w3schools.com/python/python_functions.asp"
-  },
-
-  """
-  "greet": {
-    "question": "hi",
-    "answer": "Hi there! I'm happy to help you with any questions or tasks you have."
-  },
-  "greet": {
-    "question": "hey",
-    "answer": "Hey! What brings you here today? I'm here to help with any questions or information you need."
-  },
-  "greet": {
-    "question": "good morning",
-    "answer": "Good morning! I hope you're having a great day so far. How can I assist you today?"
-  },
-  "greet": {
-    "question": "good afternoon",
-    "answer": "Good afternoon! I'm here to help with any questions or tasks you have. How can I assist you today?"
-  },
-  "greet": {
-    "question": "good evening",
-    "answer": "Good evening! I hope you're having a great evening. How can I assist you tonight?"
-  },
-"""
-  
-"functions": {
-"question": [
-"What are functions in Python?",
-"Define functions in python",
-"What is the purpose of functions in Python?",
-"How do you define a function in Python?",
-"What are the benefits of using functions in Python?",
-"How do you pass arguments to a function in Python?",
-"What is the difference between a function and a procedure in Python?"
-],
+knowledge_base={
+    "functions": {
+    "question": "What are functions in Python?",
     "answer": "Functions are reusable blocks of code that perform specific tasks. They can take arguments (inputs) and return values (outputs). Functions help in organizing code and making it more modular.",
     "difficulty_level": "beginner",
     "additional_resources": "https://www.w3schools.com/python/python_functions.asp"
   },
   
-  "Types of functions": {
+  "Types_Of_functions": {
     "question": "What are the different types of functions in Python?",
     "answer": "Python functions come in two flavors: built-in (ready-made) and user-defined (custom made for your program).",
     "difficulty_level": "beginner",
     "additional_resources": "https://www.w3schools.com/python/python_functions.asp"
   },
-
-"lists": {
-"question": [
-"What are lists in Python?",
-"Define lists in python",
-"What is a list data structure in Python?",
-"How do you create a list in Python?",
-"What are the characteristics of lists in Python?"
-],
+"""
+  "lists": {
+    "question": [
+      "What are lists in Python?",
+      "Define lists in Py.",
+    ], 
     "answer": "Lists are ordered collections of items. They can store different data types (like integers, strings, or even other lists) and are mutable (elements can be changed after creation).",
     "difficulty_level": "beginner",
     "additional_resources": "https://www.tutorialspoint.com/python/python_lists.htm"
   },
+  """
 
-"dictionaries": {
-    "question": [
-        "What are dictionaries in Python?",
-        "Define dictionaries",
-        "Explain dictionaries in python."
-    ],
-
+  "dictionaries": {
+    "question": "What are dictionaries in Python?",
     "answer": "Dictionaries are unordered collections of key-value pairs. Keys are unique and used to access the corresponding values. Dictionaries are useful for storing and organizing data based on keys.",
     "difficulty_level": "beginner",
     "additional_resources": "https://www.programiz.com/python/dictionary/"
@@ -423,7 +373,7 @@ knowledge_base = {
     "additional_resources": "https://www.nltk.org/"
 },
 
-"database programming with SQLAlchemy": {
+"SQLAlchemy": {
     "question": "How to do database programming with SQLAlchemy in Python?",
     "answer": "SQLAlchemy is a powerful SQL toolkit and Object-Relational Mapping (ORM) library for Python. It provides a full suite of tools for working with databases in Python, including a SQL expression language, an ORM, and a schema migration system. SQLAlchemy allows you to interact with databases using Pythonic objects and expressions, making database programming more intuitive and efficient.",
     "difficulty_level": "advanced",
@@ -458,87 +408,23 @@ knowledge_base = {
 },
 
   "bars": {
-    "question": "What are bars",
+    "question": "What are bars in data visualization?",
     "answer": "In data visualization, bars are graphical representations used to display categorical data. Each bar typically represents a category, and the length or height of the bar corresponds to the value associated with that category. Bar charts are commonly used to compare the values of different categories.",
     "difficulty_level": "beginner",
     "additional_resources": "https://www.data-to-viz.com/caveat/barplot.html"
   },
 
   "histogram": {
-    "question": "What is a histogram?",
+    "question": "What is a histogram in data visualization?",
     "answer": "A histogram is a graphical representation of the distribution of numerical data. It consists of a series of adjacent bars, where each bar represents a range of values (bin) and the height of the bar indicates the frequency of data points falling within that range. Histograms are useful for visualizing the shape, center, and spread of a dataset.",
     "difficulty_level": "intermediate",
     "additional_resources": "https://www.displayr.com/what-is-a-histogram/"
   },
 
   "pie chart": {
-    "question": "What is a pie chart?",
+    "question": "What is a pie chart in data visualization?",
     "answer": "A pie chart is a circular statistical graphic that is divided into slices to illustrate numerical proportions. Each slice represents a proportionate part of the whole, and the size of each slice is proportional to the quantity it represents. Pie charts are useful for showing the relative sizes of categories or percentages in a dataset.",
     "difficulty_level": "beginner",
     "additional_resources": "https://datavizcatalogue.com/methods/pie_chart.html"
-  }
+  },
 }
-
-def preprocess_query(query):
-    #print("Preprocessing query...")
-    tokens = word_tokenize(query)
-    return [word.lower() for word in tokens]
-
-def get_potential_concepts(preprocessed_query, knowledge_base):
-    #print("Getting potential concepts...")
-    potential_concepts = []
-    for concept in knowledge_base.keys():
-        if any(word in concept for word in preprocessed_query):
-            potential_concepts.append(concept)
-    return potential_concepts
-
-def get_explanation(query):
-    #print("Inside get_explanation function")
-    # Preprocess the user query
-    preprocessed_query = preprocess_query(query)
-   # print("Preprocessed query:", preprocessed_query)
-
-    # Print keys of the knowledge base for debugging
-    #print("Knowledge base keys:", knowledge_base.keys())
-
-    # Identify potential concepts in the knowledge base that match the query
-    potential_concepts = get_potential_concepts(preprocessed_query, knowledge_base)
-    #print("Potential concepts:", potential_concepts)
-
-    # If no potential concepts found, return a message
-    if not potential_concepts:
-        print("Concept not found in the knowledge base.")
-        return
-
-    # If a perfect match is found, return the explanation directly
-    if len(potential_concepts) == 1:
-        concept = potential_concepts[0]
-        #print("Perfect match found")
-        return knowledge_base[concept]  # Return the entire concept dictionary
-
-    # If no perfect match, identify the concept with the most matching words (basic approach)
-    elif potential_concepts:
-        best_match_concept = max(potential_concepts, key=lambda concept: len(set(preprocessed_query) & set(concept.split())))
-        #print("Best match found")
-        return knowledge_base[best_match_concept]  # Return the entire concept dictionary
-
-def main():
-    print("Script started")
-    while True:
-        user_query = input("Enter a question about programming (or 'quit' to exit): ")
-        if user_query.lower() == 'quit':
-            break
-        
-        concept_info = get_explanation(user_query)
-        if concept_info:
-            explanation = concept_info["answer"]
-            difficulty_level = concept_info["difficulty_level"]
-            additional_resources = concept_info.get("additional_resources", None)
-            
-            print(f"\nExplanation for {user_query}:")
-            print(explanation)
-            if additional_resources:
-                print(f"\nAdditional Resources: {additional_resources}")
-
-if __name__ == "__main__":
-    main()
