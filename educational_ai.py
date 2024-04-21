@@ -1,7 +1,7 @@
 from nlp_utils import preprocess_query  # Import the preprocess_query function
 from nlp_utils import get_potential_concepts
 from nlp_utils import *
-from summarization.auto_summarization import AutomaticSummarizer  # Import for Gensim 4.0+
+from summarization.auto_summarization import AutomaticSummarizer  # Import for Gensim 4.0
 # ... other imports (including your get_explanation function)
 
 
