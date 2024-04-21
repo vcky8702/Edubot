@@ -34,6 +34,7 @@ def get_explanation(query):
 knowledge_base = {
   # Sample entries in your knowledge base
 
+
   "functions": {
     "question": "What are functions in Python?",
     "answer": "Functions are reusable blocks of code that perform specific tasks. They can take arguments (inputs) and return values (outputs). Functions help in organizing code and making it more modular.",
